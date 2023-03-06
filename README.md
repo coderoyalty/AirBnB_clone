@@ -1,6 +1,6 @@
 # AirBnB Clone.
 
-![](./nbnb_logo.png)
+![](./hbnb_logo.png)
 
 ## Description
 
