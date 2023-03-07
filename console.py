@@ -1,16 +1,16 @@
 #!/usr/bin/python3
 """
 AirBnB v: 0.1 -> The Console v: 0.01
-Contains entry point of the command interpreter
+Contains the entry point of the command interpreter
 """
 
 import cmd
 
 
-class CmdConsole(cmd.Cmd):
+class HBNBCommand(cmd.Cmd):
     """ simple command processor example. """
 
-    prompt = "(hbnb)"
+    prompt = "(hbnb) "
 
     def do_create(self, line):
         """
@@ -42,9 +42,9 @@ class CmdConsole(cmd.Cmd):
         return True
 
     def do_quit(self, line):
-        """ handle 'quit' command """
+        """ quit command to exit the program """
         return True
 
 
 if __name__ == '__main__':
-    CmdConsole().cmdloop()
+    HBNBCommand().cmdloop()
