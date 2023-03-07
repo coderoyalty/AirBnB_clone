@@ -5,6 +5,7 @@ file and deserializes JSON file to instances
 """
 
 import json
+from models.base_model import BaseModel
 
 
 class FileStorage:
@@ -57,6 +58,7 @@ class FileStorage:
                 for value in data.values():
                     cls = value.get('__class__')
                     if cls:
-                        self.new(eval(cls)(**value))
+                        obj = eval(cls)(**value)
+                        self.new(obj)
         except Exception:
             pass
