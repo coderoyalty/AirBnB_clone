@@ -12,18 +12,12 @@ import pep8
 
 class TestBaseModel(unittest.TestCase):
     """
-        Tests attributes of base model
+        Test Model for testing attributes of base model
     """
-
-    def setup(self):
-        """
-            classes needed for testing
-        """
-        pass
 
     def test_pep8_model(self):
         """
-            Tests for pep8 model
+            Tests for pep8 model in specific files
         """
         files = []
         files.append('models/base_model.py')
