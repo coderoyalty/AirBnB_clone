@@ -42,7 +42,7 @@ class BaseModel:
             for key, value in kwargs.items():
                 if key in ("created_at", "updated_at"):
                     setattr(self.__dict__, key, datetime.strptime(value, FORMAT))
-                elif key != '__class__':
+                else:
                     self.__dict__[key] = value
 
     def save(self):
