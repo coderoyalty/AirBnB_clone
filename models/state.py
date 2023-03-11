@@ -7,7 +7,9 @@ from models.base_model import BaseModel
 
 class State(BaseModel):
     """
-    State model.
+    State model which inherits from BaseModel
+    Attributes:
+        name: name of the state i.e Lagos.
     """
     name = ""
 
