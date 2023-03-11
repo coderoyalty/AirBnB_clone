@@ -41,10 +41,8 @@ class BaseModel:
         else:
             for key, value in kwargs.items():
                 if key in ("created_at", "updated_at"):
-                    self.__dict__[key] = datetime.strptime(value, FORMAT)
-                elif key == 'id':
-                    self.__dict__[key] = str(value)
-                else:
+                    setattr(self.__dict__, key, datetime.strptime(value, FORMAT))
+                elif key != '__class__':
                     self.__dict__[key] = value
 
     def save(self):
@@ -62,12 +60,9 @@ class BaseModel:
             of the instance.
         """
 
-        objects = {}
-        for key, val in self.__dict__.items():
-            if key in ["updated_at", "created_at"]:
-                objects[key] = val.isoformat()
-            else:
-                objects[key] = val
+        objects = self.__dict__.copy()
+        objects["updated_at"] = self.updated_at.isoformat()
+        objects["created_at"] = self.created_at.isoformat()
         objects['__class__'] = self.__class__.__name__
         return objects
 
