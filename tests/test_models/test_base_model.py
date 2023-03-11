@@ -3,8 +3,6 @@
 Test for base model
 """
 
-import os
-import json
 import unittest
 from models.base_model import BaseModel
 import pep8
@@ -12,21 +10,16 @@ import pep8
 
 class TestBaseModel(unittest.TestCase):
     """
-        Tests attributes of base model
+        Test Model for testing attributes of base model
     """
-
-    def setup(self):
-        """
-            classes needed for testing
-        """
-        pass
 
     def test_pep8_model(self):
         """
-            Tests for pep8 model
+            Tests for pep8 model in specific files
         """
         files = []
         files.append('models/base_model.py')
+        files.append('tests/test_models/test_base_model.py')
         p8 = pep8.StyleGuide(quiet=True)
         p = p8.check_files(files)
         self.assertEqual(p.total_errors, 0, "pep8 error")
@@ -42,7 +35,7 @@ class TestBaseModel(unittest.TestCase):
         self.assertEqual(
             [model.name, model.percent],
             ["BaseModel", 90]
-            )
+        )
 
     def test_attributes(self):
         """
