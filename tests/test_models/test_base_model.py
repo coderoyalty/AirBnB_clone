@@ -3,8 +3,6 @@
 Test for base model
 """
 
-import os
-import json
 import unittest
 from models.base_model import BaseModel
 import pep8
@@ -12,24 +10,31 @@ import pep8
 
 class TestBaseModel(unittest.TestCase):
     """
-        Tests attributes of base model
+        Test Model for testing attributes of base model
     """
-
-    def setup(self):
-        """
-            classes needed for testing
-        """
-        pass
 
     def test_pep8_model(self):
         """
-            Tests for pep8 model
+            Tests for pep8 model in specific files
         """
         files = []
         files.append('models/base_model.py')
+        files.append('tests/test_models/test_base_model.py')
         p8 = pep8.StyleGuide(quiet=True)
         p = p8.check_files(files)
         self.assertEqual(p.total_errors, 0, "pep8 error")
+
+    def test_uuid(self):
+        """
+        universal unique identifier
+        """
+        model0 = BaseModel()
+        model1 = BaseModel()
+        self.assertTrue(hasattr(model0, "id"))
+        self.assertTrue(hasattr(model1, "id"))
+        self.assertNotEqual(model0.id, model1.id)
+        self.assertIsInstance(model0, BaseModel)
+        self.assertIsInstance(model0.id, str)
 
     def test_basic(self):
         """
@@ -42,7 +47,9 @@ class TestBaseModel(unittest.TestCase):
         self.assertEqual(
             [model.name, model.percent],
             ["BaseModel", 90]
-            )
+        )
+        self.assertTrue(hasattr(model, "name"))
+        self.assertTrue(hasattr(model, "percent"))
 
     def test_attributes(self):
         """
@@ -54,12 +61,7 @@ class TestBaseModel(unittest.TestCase):
         model1_dict = model1.to_dict()
         c_model0 = BaseModel(**model0_dict)
         c_model0_dict = c_model0.to_dict()
-        self.assertNotEqual(
-            model0.id, model1.id
-        )
-        self.assertEqual(
-            model0.id, c_model0.id
-        )
+
         self.assertNotEqual(
             model0_dict, model1_dict
         )

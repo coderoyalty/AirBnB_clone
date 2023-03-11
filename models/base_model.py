@@ -32,7 +32,6 @@ class BaseModel:
             **kwargs(dict): attribute values
         """
         FORMAT = "%Y-%m-%dT%H:%M:%S.%f"
-
         if not kwargs:
             self.id = str(uuid.uuid4())
             self.created_at = datetime.now()
@@ -42,17 +41,15 @@ class BaseModel:
             for key, value in kwargs.items():
                 if key in ("created_at", "updated_at"):
                     self.__dict__[key] = datetime.strptime(value, FORMAT)
-                elif key == 'id':
-                    self.__dict__[key] = str(value)
                 else:
-                    self.__dict__[key] = value
+                    if key != "__class__":
+                        self.__dict__[key] = value
 
     def save(self):
         """
             Updates the public instance attribute update_at with
             the current datetime
         """
-
         self.updated_at = datetime.now()
         models.storage.save()
 
@@ -61,21 +58,16 @@ class BaseModel:
             returns a dictionary containing all keys/values of __dict__
             of the instance.
         """
-
-        objects = {}
-        for key, val in self.__dict__.items():
-            if key in ["updated_at", "created_at"]:
-                objects[key] = val.isoformat()
-            else:
-                objects[key] = val
+        objects = self.__dict__.copy()
+        objects["updated_at"] = self.updated_at.isoformat()
+        objects["created_at"] = self.created_at.isoformat()
         objects['__class__'] = self.__class__.__name__
         return objects
 
     def __str__(self):
         """
-        print class name, id, dictionary
+        return the current print format for the class.
         """
-
         return "[{}] ({}) {}".format(
             self.__class__.__name__, self.id, self.__dict__
-            )
+        )
