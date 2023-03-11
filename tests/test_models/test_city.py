@@ -53,7 +53,7 @@ class TestCity(unittest.TestCase):
         city0 = City()
         city0.name = "Maryland"
         city0.state_id = state.id
-        
+
         city1 = City()
         city1.name = "Lagos Mainland"
         city1.state_id = state.id
