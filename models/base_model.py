@@ -62,12 +62,9 @@ class BaseModel:
             of the instance.
         """
 
-        objects = {}
-        for key, val in self.__dict__.items():
-            if key in ["updated_at", "created_at"]:
-                objects[key] = val.isoformat()
-            else:
-                objects[key] = val
+        objects = self.__dict__.copy()
+        objects["updated_at"] = self.updated_at.isoformat()
+        objects["created_at"] = self.created_at.isoformat()
         objects['__class__'] = self.__class__.__name__
         return objects
 
