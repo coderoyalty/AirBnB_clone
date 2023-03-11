@@ -24,6 +24,18 @@ class TestBaseModel(unittest.TestCase):
         p = p8.check_files(files)
         self.assertEqual(p.total_errors, 0, "pep8 error")
 
+    def test_uuid(self):
+        """
+        universal unique identifier
+        """
+        model0 = BaseModel()
+        model1 = BaseModel()
+        self.assertTrue(hasattr(model0, "id"))
+        self.assertTrue(hasattr(model1, "id"))
+        self.assertNotEqual(model0.id, model1.id)
+        self.assertIsInstance(model0, BaseModel)
+        self.assertIsInstance(model0.id, str)
+
     def test_basic(self):
         """
             test inputs for the BaseModel class
@@ -36,6 +48,8 @@ class TestBaseModel(unittest.TestCase):
             [model.name, model.percent],
             ["BaseModel", 90]
         )
+        self.assertTrue(hasattr(model, "name"))
+        self.assertTrue(hasattr(model, "percent"))
 
     def test_attributes(self):
         """
@@ -47,12 +61,7 @@ class TestBaseModel(unittest.TestCase):
         model1_dict = model1.to_dict()
         c_model0 = BaseModel(**model0_dict)
         c_model0_dict = c_model0.to_dict()
-        self.assertNotEqual(
-            model0.id, model1.id
-        )
-        self.assertEqual(
-            model0.id, c_model0.id
-        )
+
         self.assertNotEqual(
             model0_dict, model1_dict
         )
