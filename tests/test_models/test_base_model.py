@@ -3,8 +3,6 @@
 Test for base model
 """
 
-import os
-import json
 import unittest
 from models.base_model import BaseModel
 import pep8
@@ -37,7 +35,7 @@ class TestBaseModel(unittest.TestCase):
         self.assertEqual(
             [model.name, model.percent],
             ["BaseModel", 90]
-            )
+        )
 
     def test_attributes(self):
         """
