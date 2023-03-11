@@ -43,7 +43,8 @@ class BaseModel:
                 if key in ("created_at", "updated_at"):
                     self.__dict__[key] = datetime.strptime(value, FORMAT)
                 else:
-                    self.__dict__[key] = value
+                    if key != "__class__":
+                        self.__dict__[key] = value
 
     def save(self):
         """
@@ -68,7 +69,7 @@ class BaseModel:
 
     def __str__(self):
         """
-        print class name, id, dictionary
+        return the current print format for the class.
         """
 
         return "[{}] ({}) {}".format(
