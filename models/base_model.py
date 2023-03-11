@@ -41,7 +41,7 @@ class BaseModel:
         else:
             for key, value in kwargs.items():
                 if key in ("created_at", "updated_at"):
-                    setattr(self.__dict__, key, datetime.strptime(value, FORMAT))
+                    self.__dict__[key] = datetime.strptime(value, FORMAT)
                 else:
                     self.__dict__[key] = value
 

@@ -27,6 +27,7 @@ class TestBaseModel(unittest.TestCase):
         """
         files = []
         files.append('models/base_model.py')
+        files.append('tests/test_models/test_base_model.py')
         p8 = pep8.StyleGuide(quiet=True)
         p = p8.check_files(files)
         self.assertEqual(p.total_errors, 0, "pep8 error")
