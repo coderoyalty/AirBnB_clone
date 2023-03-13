@@ -14,7 +14,7 @@ class FileStorage:
     custom class for file storage
     """
 
-    __file__path = "file.json"
+    __file_path = "file.json"
     __objects = {}
 
     def all(self):
@@ -36,12 +36,12 @@ class FileStorage:
             str(object.id)
         ] = object
 
-    def save(self):
+    def save(self, obj=None):
         """
         serializes __object to a JSON file
         (file path: __file_path)
         """
-        with open(self.__file__path, "w+") as fp:
+        with open(self.__file_path, "w+") as fp:
             json.dump(
                 {
                     key: value.to_dict()
@@ -54,7 +54,7 @@ class FileStorage:
          deserializes the JSON file to __objects if it exists
         """
         try:
-            with open(self.__file__path, "r") as fp:
+            with open(self.__file_path, "r") as fp:
                 data = json.loads(fp.read())
                 for value in data.values():
                     cls = value.get('__class__')
