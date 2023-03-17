@@ -3,3 +3,4 @@ __pycache__/*
 .vscode
 .vscode/*
 file.json
+w3c_validator.py
